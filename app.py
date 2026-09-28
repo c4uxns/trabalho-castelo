@@ -6,9 +6,9 @@ app = Flask(__name__)
 def home():
     return render_template('index.html')
 
-# @app.route('/health')
-# def health():
-#     return {"status": "healthy"}, 200
+ @app.route('/health')
+ def health():
+     return {"status": "healthy"}, 200
 
 
 if __name__ == '__main__':
