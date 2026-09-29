@@ -515,7 +515,8 @@ Adicionar capturas de tela das seguintes evidências:
 ## Evidência do Ambiente Cloud
 
 - Instância Oracle Cloud criada;
-- <img width="1600" height="440" alt="image" src="https://github.com/user-attachments/assets/885295b7-4ce1-433b-ac98-9ac0af02da41" />
+- <img width="1567" height="96" alt="image" src="https://github.com/user-attachments/assets/470d92a8-b92e-495a-8649-3dbcf19f4e08" />
+
 
 - Informações da VM;
 - <img width="1415" height="766" alt="trabalho" src="https://github.com/user-attachments/assets/6704e859-68a5-4a10-8fe3-6c989dab9100" />
