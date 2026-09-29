@@ -515,8 +515,13 @@ Adicionar capturas de tela das seguintes evidências:
 ## Evidência do Ambiente Cloud
 
 - Instância Oracle Cloud criada;
+- <img width="1600" height="440" alt="image" src="https://github.com/user-attachments/assets/885295b7-4ce1-433b-ac98-9ac0af02da41" />
+
 - Informações da VM;
+- <img width="1415" height="766" alt="trabalho" src="https://github.com/user-attachments/assets/6704e859-68a5-4a10-8fe3-6c989dab9100" />
+
 - Endereço IP público.
+- http://144.22.162.133:5000
 
 ## Evidência do Docker
 
@@ -525,26 +530,43 @@ Adicionar capturas de tela das seguintes evidências:
 ```bash
 docker ps
 ```
+<img width="651" height="45" alt="image" src="https://github.com/user-attachments/assets/635f80c9-909b-4b9a-967b-d979331099c6" />
+
 
 - Imagem Docker criada:
 
 ```bash
 docker images
 ```
+<img width="729" height="116" alt="image" src="https://github.com/user-attachments/assets/71bd8beb-b566-4d77-ab93-291f0d58c680" />
+
+
 
 ## Evidência do CI/CD
 
 - Execução da pipeline no GitHub Actions;
+- <img width="1631" height="647" alt="image" src="https://github.com/user-attachments/assets/62a293a6-e1da-40f7-9de7-db08c5c8ff35" />
+
 - Deploy realizado com sucesso.
+- <img width="662" height="675" alt="image" src="https://github.com/user-attachments/assets/185f6bf2-0327-4f0b-9681-a99df926b271" />
+
 
 ## Evidência do Monitoramento
 
 - Página de monitoramento;
+- <img width="1894" height="442" alt="image" src="https://github.com/user-attachments/assets/68f82507-5885-4f1f-91e2-6aae16f77744" />
+
 - Verificação da disponibilidade da aplicação;
 - Status do servidor e dos containers.
+<img width="1872" height="904" alt="image" src="https://github.com/user-attachments/assets/d3894d97-8445-46d1-8c57-e554d7dcb687" />
+
 
 ## Evidência da Aplicação
 
 - Página inicial carregada;
+- <img width="1920" height="1043" alt="image" src="https://github.com/user-attachments/assets/8097d002-50da-4afa-a33b-587b0f1bbca0" />
+
 - Domínio funcionando;
 - HTTPS ativo com certificado válido.
+- <img width="316" height="271" alt="image" src="https://github.com/user-attachments/assets/46841603-be1c-4a1c-bccc-468d1d12b6ec" />
+
