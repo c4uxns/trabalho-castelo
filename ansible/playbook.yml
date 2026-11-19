@@ -1,0 +1,32 @@
+---
+- hosts: webservers
+  become: true
+  tasks:
+    - name: Atualizar pacotes do sistema
+      apt:
+        update_cache: yes
+
+    - name: Instalar Docker e dependências
+      apt:
+        name:
+          - docker.io
+          - docker-compose-v2
+          - git
+        state: present
+
+    - name: Garantir que o Docker está rodando
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Clonar ou atualizar o repositório da aplicação
+      git:
+        repo: 'https://github.com/c4uxns/trabalho-castelo.git'
+        dest: /home/ubuntu/trabalho-castelo
+        force: yes
+
+    - name: Subir a aplicação via Docker Compose
+      community.docker.docker_compose_v2:
+        project_src: /home/ubuntu/trabalho-castelo
+        state: present
