@@ -49,7 +49,8 @@ A página apresenta:
 - Nome da disciplina;
 - Nome completo dos integrantes do grupo;
 - Aplicação acessível através de HTTP e HTTPS;
-- Hospedagem em ambiente cloud utilizando Oracle Cloud.
+- Hospedagem em ambiente cloud utilizando Oracle Cloud;
+- Provisionamento e implantação automatizados com Ansible.
 
 ---
 
@@ -115,7 +116,10 @@ IP Público (144.22.162.133)
 Servidor Oracle Cloud
    │
    ▼
-Nginx
+Ansible
+   │
+   ▼
+Nginx / Docker
    │
    ▼
 Container Docker
@@ -144,6 +148,11 @@ Diagrama Simplificado:
        │
        ▼
 ┌────────────────────┐
+│ Ansible Provision  │
+└──────┬─────────────┘
+       │
+       ▼
+┌────────────────────┐
 │ Nginx Reverse Proxy│
 └──────┬─────────────┘
        │
@@ -162,6 +171,7 @@ Diagrama Simplificado:
 - Flask
 - Docker
 - Docker Compose
+- Ansible
 - Nginx
 - Git
 - GitHub
@@ -180,6 +190,10 @@ trabalho-castelo/
 ├── .github/
 │   └── workflows/
 │       └── deploy.yml
+│
+├── ansible/
+│   ├── inventory.ini.example
+│   └── playbook.yml
 │
 ├── templates/
 │   └── index.html
@@ -217,6 +231,14 @@ Arquivo responsável pela execução dos containers.
 ### deploy.yml
 
 Pipeline de CI/CD via GitHub Actions.
+
+### ansible/inventory.ini.example
+
+Modelo de inventário dos servidores gerenciados pelo Ansible.
+
+### ansible/playbook.yml
+
+Playbook responsável por atualizar o servidor, instalar Docker e dependências, obter o repositório e iniciar a aplicação com Docker Compose.
 
 ### README.md
 
@@ -262,11 +284,33 @@ docker ps
 http://localhost:5000
 ```
 
+## Provisionamento com Ansible
+
+O projeto inclui um playbook Ansible para configurar o servidor remoto de forma automatizada. Antes da execução, copie o modelo de inventário e ajuste o IP, usuário e chave SSH:
+
+```bash
+cp ansible/inventory.ini.example ansible/inventory.ini
+```
+
+Execute o playbook:
+
+```bash
+ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+```
+
+O playbook realiza as seguintes tarefas:
+
+- Atualiza os pacotes do sistema;
+- Instala Docker, Docker Compose V2 e Git;
+- Garante que o serviço Docker esteja iniciado;
+- Clona ou atualiza o repositório da aplicação;
+- Inicia a aplicação com Docker Compose.
+
 ---
 
 # 9. Processo de Deploy
 
-O deploy é realizado através da pipeline configurada no GitHub Actions.
+O deploy é realizado inicialmente pela pipeline configurada no GitHub Actions. O ambiente também pode ser configurado e atualizado com Ansible, garantindo uma implantação padronizada e repetível.
 
 Fluxo:
 
@@ -281,6 +325,9 @@ GitHub
       │
       ▼
 GitHub Actions
+      │
+      ▼
+Ansible
       │
       ▼
 Servidor Oracle Cloud
@@ -399,7 +446,7 @@ Aplicação
 
 # 13. Processo de CI/CD
 
-A automação é realizada através do GitHub Actions.
+A automação é realizada através do GitHub Actions e pode ser complementada pelo Ansible para o provisionamento e configuração do servidor.
 
 Fluxo implementado:
 
@@ -413,7 +460,7 @@ Build
 Validação
    │
    ▼
-Deploy
+Ansible / Deploy
    │
    ▼
 Produção
@@ -422,6 +469,7 @@ Produção
 Benefícios:
 
 - Automatização do deploy;
+- Provisionamento padronizado com Ansible;
 - Redução de erros humanos;
 - Maior velocidade de entrega;
 - Padronização do ambiente.
@@ -488,6 +536,14 @@ docker compose down
 docker compose up -d --build
 ```
 
+## Executar novamente o Ansible
+
+```bash
+ansible-playbook -i ansible/inventory.ini ansible/playbook.yml
+```
+
+Esse procedimento reaplica o estado desejado no servidor.
+
 ## Verificar Logs
 
 ```bash
@@ -517,12 +573,18 @@ Adicionar capturas de tela das seguintes evidências:
 - Instância Oracle Cloud criada;
 - <img width="1567" height="96" alt="image" src="https://github.com/user-attachments/assets/470d92a8-b92e-495a-8649-3dbcf19f4e08" />
 
-
 - Informações da VM;
 - <img width="1415" height="766" alt="trabalho" src="https://github.com/user-attachments/assets/6704e859-68a5-4a10-8fe3-6c989dab9100" />
 
 - Endereço IP público.
 - http://144.22.162.133:5000
+
+## Evidência do Ansible
+
+- Arquivos `inventory.ini.example` e `playbook.yml` presentes no repositório;
+- Execução bem-sucedida do playbook;
+- Servidor configurado com Docker e Docker Compose;
+- Aplicação iniciada pelo Docker Compose após o provisionamento.
 
 ## Evidência do Docker
 
@@ -533,15 +595,12 @@ docker ps
 ```
 <img width="651" height="45" alt="image" src="https://github.com/user-attachments/assets/635f80c9-909b-4b9a-967b-d979331099c6" />
 
-
 - Imagem Docker criada:
 
 ```bash
 docker images
 ```
-<img width="729" height="116" alt="image" src="https://github.com/user-attachments/assets/71bd8beb-b566-4d77-ab93-291f0d58c680" />
-
-
+<img width="729" height="116" alt="image" src="https://github.com/user-attachments/assets/71bd8beb-b566-4d77-ab93-291f0d85c680" />
 
 ## Evidência do CI/CD
 
@@ -550,7 +609,6 @@ docker images
 
 - Deploy realizado com sucesso.
 - <img width="662" height="675" alt="image" src="https://github.com/user-attachments/assets/185f6bf2-0327-4f0b-9681-a99df926b271" />
-
 
 ## Evidência do Monitoramento
 
@@ -561,7 +619,6 @@ docker images
 - Status do servidor e dos containers.
 <img width="1872" height="904" alt="image" src="https://github.com/user-attachments/assets/d3894d97-8445-46d1-8c57-e554d7dcb687" />
 
-
 ## Evidência da Aplicação
 
 - Página inicial carregada;
@@ -570,4 +627,3 @@ docker images
 - Domínio funcionando;
 - HTTPS ativo com certificado válido.
 - <img width="316" height="271" alt="image" src="https://github.com/user-attachments/assets/46841603-be1c-4a1c-bccc-468d1d12b6ec" />
-
