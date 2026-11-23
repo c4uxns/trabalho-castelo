@@ -581,6 +581,9 @@ Adicionar capturas de tela das seguintes evidências:
 
 ## Evidência do Ansible
 
+<img width="1919" height="536" alt="image" src="https://github.com/user-attachments/assets/c3ada29c-a3d2-4062-aadb-28254ff3c221" />
+
+
 - Arquivos `inventory.ini.example` e `playbook.yml` presentes no repositório;
 - Execução bem-sucedida do playbook;
 - Servidor configurado com Docker e Docker Compose;
@@ -589,7 +592,8 @@ Adicionar capturas de tela das seguintes evidências:
 ## Evidência do Docker
 
 - Resultado do comando:
-<img width="651" height="45" alt="image" src="https://github.com/user-attachments/assets/" />
+  <img width="1919" height="1035" alt="docker" src="https://github.com/user-attachments/assets/4b13ca0d-46df-48e4-8916-5af175320a33" />
+
 
 ```bash
 docker ps
