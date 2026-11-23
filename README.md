@@ -589,6 +589,7 @@ Adicionar capturas de tela das seguintes evidências:
 ## Evidência do Docker
 
 - Resultado do comando:
+<img width="651" height="45" alt="image" src="https://github.com/user-attachments/assets/" />
 
 ```bash
 docker ps
